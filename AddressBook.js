@@ -1,7 +1,9 @@
+const prompt = require('prompt-sync')();
+
 class AddressBook{
     constructor(...params){
         this.firstName=params[0];
-        this.lastname=params[1];
+        this.lastName=params[1];
         this.address=params[2];
         this.city=params[3];
         this.state=params[4];
@@ -12,22 +14,23 @@ class AddressBook{
 
     get firstName() {return this._firstName;}
     set firstName(firstName) {
-        var nameRegex=RegExp('^[A-Z][a-z]{2,}$');
+        let nameRegex=RegExp('^[A-Z][a-z]{2,}$');
         if(nameRegex.test(firstName))
             this._firstName=firstName;
         else
             throw 'First name is incorrect.';
         }
-    get lastname() {return this._lastname;}
-    set lastname(lastname) {
-        if(nameRegex.test(lastname))
-            this._lastname=lastname;
+    get lastName() {return this._lastName;}
+    set lastName(lastName) {
+        let nameRegex=RegExp('^[A-Z][a-z]{2,}$');
+        if(nameRegex.test(lastName))
+            this._lastName=lastName;
         else
             throw 'Last name is incorrect.';
         }
     get address() {return this._address;}
     set address(address) {
-        var addrRegex=RegExp('^[A-Z][a-z]{3,}$');
+        let addrRegex=RegExp('^[A-Z][a-z]{3,}$');
         if(addrRegex.test(address))
             this._address=address;
         else
@@ -35,6 +38,7 @@ class AddressBook{
         }
     get city() {return this._city;}
     set city(city) {
+        let addrRegex=RegExp('^[A-Z][a-z]{3,}$');
         if(addrRegex.test(city))
             this._city=city;
         else
@@ -42,6 +46,7 @@ class AddressBook{
     }
     get state() {return this._state;}
     set state(state) {
+        let addrRegex=RegExp('^[A-Z][a-z]{3,}$');
         if(addrRegex.test(state))
             this._state=state;
         else
@@ -56,7 +61,7 @@ class AddressBook{
         }
     get phone() {return this._phone;}
     set phone(phone) {
-        let phoneRegex=RegExp('^[1-9]{1}[0-9]{2}[ ]?[0-9]{3}$');
+        let phoneRegex=RegExp('^[1-9]{2,3}\\s[7-9]{1}[0-9]{9}$');
         if(phoneRegex.test(phone))
             this._phone=phone;
         else
@@ -72,9 +77,33 @@ class AddressBook{
     }
 
     toString(){
-        return "First Name: "+this.firstName+", Last Name: "+this.lastname+", Address: "+
+        return "First Name: "+this.firstName+", Last Name: "+this.lastName+"\nAddress: "+
         this.address+", City: "+this.city+", State: "+this.state+", Zip: "+this.zip+
-        ", Phone No: "+this.phone+", Email: "+this.email;
+        "\nPhone No: "+this.phone+", Email: "+this.email;
     }
 }
+var addressBookData=new Array();
+function addContact(){
+    let firstName=prompt("Enter First Name :");
+    let lastName=prompt("Enter Last Name :");
+    let address=prompt("Enter address :");
+    let city=prompt("Enter city :");
+    let state=prompt("Enter state :");
+    let zip=prompt("Enter zip code :");
+    let phone=prompt("Enter phone number :");
+    let email=prompt("Enter email id :");
+    console.log("\nContact added :");
+    addressBookData.push(new AddressBook(firstName,lastName,address,city,state,zip,phone,email));
+    console.log(addressBookData.toString());
+}
 
+do{
+var choice=Number(prompt("Enter option : 1.Add New contact 2.Exit== "));
+    switch(choice){
+        case 1: addContact();
+                break;
+        case 2: console.log("You exit the program.");
+                break;
+        default:    console.log("Wrong choice.");
+    }
+}while(choice != 2);
