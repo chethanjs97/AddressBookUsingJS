@@ -130,7 +130,7 @@ function deleteContact(){
 
 do{
 var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Display all contacts"+
-                        " 4.Delete Contact 5.Exit== "));
+                        " 4.Delete Contact 5.Total Contacts 6.Exit== "));
     switch(choice){
         case 1: addContact();
                 break;
@@ -140,8 +140,11 @@ var choice=Number(prompt("Enter option : 1.Add New contact 2.Update Contact 3.Di
                 break;
         case 4: deleteContact();
                 break;
-        case 5: console.log("You exit the program.");
+        case 5: let totalContacts=addressBookData.reduce((totalContacts) => totalContacts+=1,0);
+                console.log("Number of contacts in addressbook are : "+totalContacts); 
+                break;
+        case 6: console.log("You exit the program.");
                 break;
         default:    console.log("Wrong choice.");
     }
-}while(choice != 5);
+}while(choice != 6);
